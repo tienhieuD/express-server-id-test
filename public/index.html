@@ -12,6 +12,7 @@
     <div>
         <button id="login">Login</button>
         <button id="user">Get User Info</button>
+        <button id="logout">Logout</button>
     </div>
     <code id="log">
 
@@ -25,7 +26,7 @@
             client_id: 'funzy.game.dev',
             redirect_uri: "http://localhost:8080/signin/callback",
             post_logout_redirect_uri: "http://localhost:8080/signout/callback",
-            scope: 'openid profile phone email offline_access funzy_api',
+            scope: 'openid profile phone email offline_access funzy_api fpay-api-user-get ',
             response_type: "code",
             filterProtocolClaims: true,
             loadUserInfo: true,
@@ -42,26 +43,32 @@
 
         var buttonLogin = document.getElementById("login");
         buttonLogin.addEventListener('click', function (event) {
-            window.FtechFID.login()
+            // window.FtechFID.login()
+            window.FtechFID.mgr.signinPopup({
+                state: 'some data'
+            }).then(function (user) {
+                log("signed in");
+            }).catch(function (err) {
+                log(err);
+            });
         });
 
         var buttonUser = document.getElementById("user");
         buttonUser.addEventListener('click', async function () {
             let user = await window.FtechFID.mgr.getUser();
-            const userInfo = user?.profile;
-            const idToken = user?.id_token;
-            const refreshToken = user?.refresh_token;
-            const accessToken = user?.access_token;
             log(user)
-            
-            // const userInfo = await FtechFID.getUserAsync()
-            // const {
-            //     name,
-            //     preferred_username,
-            //     sub
-            // } = userInfo;
-            // console.log("userInfo", name, preferred_username, sub);
-            // log(userInfo);
+        });
+
+
+        var buttonLogout = document.getElementById("logout");
+        buttonLogout.addEventListener('click', async function () {
+            window.FtechFID.mgr.signoutPopup({
+                state: 'some data'
+            }).then(function () {
+                log("signed out");
+            }).catch(function (err) {
+                log(err);
+            });
         });
     </script>
 </body>
