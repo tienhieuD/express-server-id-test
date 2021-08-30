@@ -20,16 +20,20 @@
 
     <script src="https://oauth.fpay.dev.ftech.ai/demo/sdk/oidc-client.min.js"></script>
     <script src="https://oauth.fpay.dev.ftech.ai/demo/sdk/fid-oauth-v2.min.js"></script>
+
+    <script type="application/javascript">
+        new Oidc.UserManager().signoutCallback();
+    </script>
+
     <script type="application/javascript">
         const config = {
-            authority: "https://id-internal-dev.ftech.ai",
-            client_id: 'funzy.game.dev',
-            redirect_uri: "http://localhost:8080/signin/callback",
-            post_logout_redirect_uri: "http://localhost:8080/signout/callback",
-            scope: 'openid profile phone email offline_access funzy_api fpay-api-user-get ',
-            response_type: "code",
-            filterProtocolClaims: true,
-            loadUserInfo: true,
+            authority: 'https://id-dev.ftech.ai',
+            client_id: '666964303132',
+            response_type: 'code',
+            scope: 'openid profile phone email offline_access',
+            redirect_uri: 'http://fbang.com' + '/login-callback',
+            post_logout_redirect_uri: 'http://fbang.com',
+            popupWindowFeatures: `location=no,toolbar=no,width=500,height=700,left=${300},top=200`
         };
         window.FtechFID.init(config);
     </script>
