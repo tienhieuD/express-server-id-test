@@ -26,15 +26,29 @@
     </script>
 
     <script type="application/javascript">
+
+        // for fbang.com, để demo trên local chạy app cổng 80, sửa file system hosts thêm line 127.0.0.1 www.fbang.com
+        // const config = {
+        //     authority: 'https://id-dev.ftech.ai',
+        //     client_id: '666964303132',
+        //     response_type: 'code',
+        //     scope: 'openid profile phone email offline_access',
+        //     redirect_uri: 'http://www.fbang.com/login-callback',
+        //     post_logout_redirect_uri: 'http://www.fbang.com/logout-callback',
+        //     popupWindowFeatures: `location=no,toolbar=no,width=500,height=700,left=${500},top=200`
+        // };
+        
+        // for localhost:8080, chạy app cổng 8080
         const config = {
             authority: 'https://id-dev.ftech.ai',
             client_id: '666964303132',
             response_type: 'code',
             scope: 'openid profile phone email offline_access',
-            redirect_uri: 'http://www.fbang.com/login-callback',
-            post_logout_redirect_uri: 'http://www.fbang.com/logout-callback',
+            redirect_uri: 'http://localhost:8080/signin/callback',
+            post_logout_redirect_uri: 'http://localhost:8080/signout/callback',
             popupWindowFeatures: `location=no,toolbar=no,width=500,height=700,left=${500},top=200`
         };
+
         window.FtechFID.init(config);
     </script>
 
