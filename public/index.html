@@ -64,7 +64,7 @@
         var buttonLogin = document.getElementById("login");
         buttonLogin.addEventListener('click', function (event) {
             // Check if signin popup is opened
-            // then skip
+            // then focus and skip
             if (window.FtechFID.mgr.signinPopupInstance && window.FtechFID.mgr.signinPopupInstance._popup) {
                 window.FtechFID.mgr.signinPopupInstance._popup.focus();
                 return;
