@@ -27,7 +27,9 @@
 
     <script type="application/javascript">
 
-        // for fbang.com, để demo trên local chạy app cổng 80, sửa file system hosts thêm line 127.0.0.1 www.fbang.com
+        // for fbang.com
+        // run with port 80 (edit port at index.js)
+        // system hosts file add line `127.0.0.1 www.fbang.com`
         // const config = {
         //     authority: 'https://id-dev.ftech.ai',
         //     client_id: '666964303132',
@@ -38,7 +40,7 @@
         //     popupWindowFeatures: `location=no,toolbar=no,width=500,height=700,left=${500},top=200`
         // };
         
-        // for localhost:8080, chạy app cổng 8080
+        // for localhost:8080
         const config = {
             authority: 'https://id-dev.ftech.ai',
             client_id: '666964303132',
@@ -61,7 +63,8 @@
 
         var buttonLogin = document.getElementById("login");
         buttonLogin.addEventListener('click', function (event) {
-            // window.FtechFID.login()
+            // Check if signin popup is opened
+            // then skip
             if (window.FtechFID.mgr.signinPopupInstance && window.FtechFID.mgr.signinPopupInstance._popup) {
                 window.FtechFID.mgr.signinPopupInstance._popup.focus();
                 return;
@@ -78,6 +81,7 @@
 
         var buttonUser = document.getElementById("user");
         buttonUser.addEventListener('click', async function () {
+            // get user info
             let user = await window.FtechFID.mgr.getUser();
             log(user)
         });
@@ -85,11 +89,15 @@
 
         var buttonLogout = document.getElementById("logout");
         buttonLogout.addEventListener('click', async function () {
+
+            // check if user not login yet
+            // then skip
             let user = await window.FtechFID.mgr.getUser();
             if (!user) {
                 log("Not login, can't log out");
                 return;
             }
+
             window.FtechFID.mgr.signoutPopup({
                 state: 'some data'
             }).then(function () {
