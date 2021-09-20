@@ -85,6 +85,11 @@
 
         var buttonLogout = document.getElementById("logout");
         buttonLogout.addEventListener('click', async function () {
+            let user = await window.FtechFID.mgr.getUser();
+            if (!user) {
+                log("Not login, can't log out");
+                return;
+            }
             window.FtechFID.mgr.signoutPopup({
                 state: 'some data'
             }).then(function () {
