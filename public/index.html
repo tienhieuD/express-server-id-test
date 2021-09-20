@@ -19,7 +19,7 @@
     </code>
 
     <script src="/oidc-client.min.js"></script>
-    <script src="/fid-oauth-v2.min.js"></script>
+    <script src="/fid-oauth-v3.min.js"></script>
 
     <script type="application/javascript">
         new Oidc.UserManager().signoutCallback();
@@ -62,6 +62,11 @@
         var buttonLogin = document.getElementById("login");
         buttonLogin.addEventListener('click', function (event) {
             // window.FtechFID.login()
+            if (window.FtechFID.mgr.signinPopupInstance && window.FtechFID.mgr.signinPopupInstance._popup) {
+                window.FtechFID.mgr.signinPopupInstance._popup.focus();
+                return;
+            }
+
             window.FtechFID.mgr.signinPopup({
                 state: 'some data'
             }).then(function (user) {
